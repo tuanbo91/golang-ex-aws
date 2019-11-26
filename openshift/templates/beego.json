@@ -166,7 +166,7 @@
     {
       "name": "SOURCE_REPOSITORY_URL",
       "description": "The URL of the repository with your application source code",
-      "value": "https://github.com/openshift/golang-ex.git"
+      "value": "https://github.com/tuanbo91/golang-ex.git"
     },
     {
       "name": "SOURCE_REPOSITORY_REF",
@@ -179,7 +179,7 @@
     {
       "name": "APPLICATION_DOMAIN",
       "description": "The exposed hostname that will route to the Beego service",
-      "value": "beego-example.openshiftapps.com"
+      "value": "chat.leanhtuan.dev"
     },
     {
       "name": "GITHUB_WEBHOOK_SECRET",
