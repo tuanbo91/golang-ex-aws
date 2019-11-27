@@ -148,6 +148,15 @@
           "spec": {
             "containers": [
               {
+                "resources":
+                  {
+                    "requests": {
+                      "memory": "30Mi"
+                    },
+                    "limits": {
+                        "memory": "50Mi"
+                      }
+                  },
                 "name": "beego-example",
                 "image": "beego-example",
                 "ports": [
