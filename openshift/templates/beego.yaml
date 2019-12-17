@@ -3,10 +3,6 @@ kind: Template
 apiVersion: v1
 metadata:
   name: beego-example
-  annotations:
-    description: An example Beego (http://beego.me/) application written in Golang
-    tags: quickstart,golang
-    iconClass: icon-go-gopher
 labels:
   template: beego-example
   app: beego-example
@@ -15,16 +11,13 @@ objects:
   apiVersion: v1
   metadata:
     name: beego-example
-    annotations:
-      description: Exposes and load balances the application pods
   spec:
     ports:
     - name: web
       port: 8080
       targetPort: 8080
     selector:
-      name: beego-example
-      
+      name: beego-example  
 - kind: Route
   apiVersion: v1
   metadata:
@@ -34,20 +27,14 @@ objects:
     to:
       kind: Service
       name: beego-example
-
 - kind: ImageStream
   apiVersion: v1
   metadata:
     name: beego-example
-    annotations:
-      description: Keeps track of changes in the application image
-
 - kind: BuildConfig
   apiVersion: v1
   metadata:
     name: beego-example
-    annotations:
-      description: Defines how to build the application
   spec:
     source:
       type: Git
@@ -68,13 +55,10 @@ objects:
         secret: "${GITHUB_WEBHOOK_SECRET}"
     postCommit:
       script: go test -v ./...
-
 - kind: DeploymentConfig
   apiVersion: v1
   metadata:
     name: beego-example
-    annotations:
-      description: Defines how to deploy the application server
   spec:
     strategy:
       type: Recreate
@@ -119,7 +103,6 @@ objects:
           image: beego-example
           ports:
           - containerPort: 8080
-
 - kind: HorizontalPodAutoscaler
   apiVersion: autoscaling/v1
   metadata:
@@ -132,22 +115,13 @@ objects:
       kind: DeploymentConfig
       name: beego-example
     targetCPUUtilizationPercentage: 50
-
 parameters:
 - name: SOURCE_REPOSITORY_URL
-  description: The URL of the repository with your application source code
   value: https://github.com/tuanbo91/golang-ex.git
 - name: SOURCE_REPOSITORY_REF
-  description: Set this to a branch name, tag or other ref of your repository if you
-    are not using the default branch
 - name: CONTEXT_DIR
-  description: Set this to the relative path to your project if it is not in the root
-    of your repository
 - name: APPLICATION_DOMAIN
-  description: The exposed hostname that will route to the Beego service
   value: chat.leanhtuan.org
 - name: GITHUB_WEBHOOK_SECRET
-  description: Github trigger secret.  A difficult to guess string encoded as part
-    of the webhook URL.  Not encrypted.
   generate: expression
   from: "[a-zA-Z0-9]{40}"
