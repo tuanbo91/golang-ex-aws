@@ -1,4 +1,4 @@
-FROM registry.redhat.io/ubi7/go-toolset:1.11.13
+FROM registry.redhat.io/ubi7/go-toolset
 
 USER nobody
 
