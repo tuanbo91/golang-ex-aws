@@ -1,4 +1,4 @@
-FROM gcr.io/cloud-builders/go
+FROM registry.redhat.io/ubi7/go-toolset:1.11.13
 
 USER nobody
 
