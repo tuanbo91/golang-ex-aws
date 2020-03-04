@@ -1,4 +1,4 @@
-FROM golang:1.11
+FROM gcr.io/cloud-builders/go:1.11
 
 USER nobody
 
