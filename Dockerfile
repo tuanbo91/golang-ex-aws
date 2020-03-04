@@ -1,4 +1,4 @@
-FROM registry.redhat.io/ubi7/go-toolset
+FROM golang:1.11
 
 USER nobody
 
