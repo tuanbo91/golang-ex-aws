@@ -1,4 +1,4 @@
-FROM golang:1.11
+FROM quay.io/ltuan_sa/golang:1.11
 
 USER nobody
 
