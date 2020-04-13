@@ -2,39 +2,39 @@
 kind: Template
 apiVersion: v1
 metadata:
-  name: beego-example
+  name: golang-demo
 labels:
-  template: beego-example
-  app: beego-example
+  template: golang-demo
+  app: golang-demo
 objects:
 - kind: Service
   apiVersion: v1
   metadata:
-    name: beego-example
+    name: golang-demo-service
   spec:
     ports:
-    - name: web
+    - name: http-web
       port: 8080
       targetPort: 8080
     selector:
-      name: beego-example  
+      name: golang-demo  
 - kind: Route
   apiVersion: v1
   metadata:
-    name: beego-example
+    name: golang-demo-route
   spec:
     host: "${APPLICATION_DOMAIN}"
     to:
       kind: Service
-      name: beego-example
+      name: golang-demo-service
 - kind: ImageStream
   apiVersion: v1
   metadata:
-    name: beego-example
+    name: golang-demo-imagestream
 - kind: BuildConfig
   apiVersion: v1
   metadata:
-    name: beego-example
+    name: golang-demo-v1-0
   spec:
     source:
       type: Git
@@ -47,7 +47,7 @@ objects:
     output:
       to:
         kind: ImageStreamTag
-        name: beego-example:latest
+        name: golang-demo-imagestream:1.0
     triggers:
     - type: ConfigChange
     - type: GitHub
@@ -55,71 +55,23 @@ objects:
         secret: "${GITHUB_WEBHOOK_SECRET}"
     postCommit:
       script: go test -v ./...
-- kind: DeploymentConfig
-  apiVersion: v1
-  metadata:
-    name: beego-example
-  spec:
-    strategy:
-      type: Recreate
-    triggers:
-    - type: ImageChange
-      imageChangeParams:
-        automatic: true
-        containerNames:
-        - beego-example
-        from:
-          kind: ImageStreamTag
-          name: beego-example:latest
-    - type: ConfigChange
-    replicas: 1
-    selector:
-      name: beego-example
-    template:
-      metadata:
-        name: beego-example
-        labels:
-          name: beego-example
-      spec:
-        containers:
-        - resources:
-            requests:
-              memory: 50Mi
-              cpu: 50m
-            limits:
-              memory: 100Mi
-              cpu: 100m
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 8080
-              scheme: HTTP
-            initialDelaySeconds: 3
-            timeoutSeconds: 1
-            periodSeconds: 3
-            successThreshold: 1
-            failureThreshold: 3
-          name: beego-example
-          image: beego-example
-          ports:
-          - containerPort: 8080
 - kind: HorizontalPodAutoscaler
   apiVersion: autoscaling/v1
   metadata:
-    name: beego-example
+    name: golang-demo-hpa
   spec:
     maxReplicas: 10
     minReplicas: 1
     scaleTargetRef:
-      apiVersion: apps.openshift.io/v1
-      kind: DeploymentConfig
-      name: beego-example
+      apiVersion: apps/v1
+      kind: Deployment
+      name: golang-demo-v1-0
     targetCPUUtilizationPercentage: 50
 parameters:
 - name: SOURCE_REPOSITORY_URL
   value: https://github.com/tuanbo91/golang-ex.git
 - name: SOURCE_REPOSITORY_REF
-  value: master
+  value: v1.0
 - name: CONTEXT_DIR
 - name: APPLICATION_DOMAIN
   value: chat.leanhtuan.org

@@ -2,16 +2,16 @@ apiVersion: build.openshift.io/v1
 kind: BuildConfig
 metadata:
   labels:
-    app: beego-example
-    template: beego-example
-  name: beego-example-v1-1
+    app: golang-demo
+    template: golang-demo
+  name: golang-demo-v1-1
   namespace: golang-demo
 spec:
   failedBuildsHistoryLimit: 5
   output:
     to:
       kind: ImageStreamTag
-      name: beego-example:1.1
+      name: golang-demo-imagestream:1.1
   postCommit:
     script: go test -v ./...
   resources: {}
