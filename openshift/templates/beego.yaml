@@ -119,6 +119,7 @@ parameters:
 - name: SOURCE_REPOSITORY_URL
   value: https://github.com/tuanbo91/golang-ex.git
 - name: SOURCE_REPOSITORY_REF
+  value: master
 - name: CONTEXT_DIR
 - name: APPLICATION_DOMAIN
   value: chat.leanhtuan.org

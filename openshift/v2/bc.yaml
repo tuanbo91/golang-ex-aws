@@ -1,0 +1,34 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  labels:
+    app: beego-example
+    template: beego-example
+  name: beego-example-v1-1
+  namespace: golang-demo
+spec:
+  failedBuildsHistoryLimit: 5
+  output:
+    to:
+      kind: ImageStreamTag
+      name: beego-example:1.1
+  postCommit:
+    script: go test -v ./...
+  resources: {}
+  runPolicy: Serial
+  source:
+    git:
+      ref: v1.1
+      uri: https://github.com/tuanbo91/golang-ex.git
+    type: Git
+  strategy:
+    dockerStrategy: {}
+    type: Docker
+  successfulBuildsHistoryLimit: 5
+  triggers:
+  - type: ConfigChange
+  - github:
+      secret: k4B6Pv7YvN5lXLq2LO1ADDctHT5QXO5bCM6NV5SH
+    type: GitHub
+status:
+  lastVersion: 2
