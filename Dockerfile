@@ -1,4 +1,4 @@
-FROM quay.io/ltuan_sa/golang:1.11
+FROM image-registry.openshift-image-registry.svc:5000/openshift/golang:1.11
 
 USER nobody
 
