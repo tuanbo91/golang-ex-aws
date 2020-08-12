@@ -6,7 +6,7 @@ metadata:
 spec:
   servers:
     - hosts:
-        - chat.leanhtuan.org
+        - chat-aws.leanhtuan.org
       port:
         name: http
         number: 80

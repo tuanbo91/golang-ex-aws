@@ -7,7 +7,7 @@ metadata:
     kiali_wizard: weighted_routing
 spec:
   hosts:
-    - chat.leanhtuan.org
+    - chat-aws.leanhtuan.org
   gateways:
     - golang-demo/golang-demo-service-gateway
   http:

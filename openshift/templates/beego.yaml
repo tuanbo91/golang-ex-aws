@@ -60,7 +60,7 @@ objects:
     targetCPUUtilizationPercentage: 50
 parameters:
 - name: SOURCE_REPOSITORY_URL
-  value: https://github.com/tuanbo91/golang-ex.git
+  value: https://github.com/tuanbo91/golang-ex-aws.git
 - name: SOURCE_REPOSITORY_REF
   value: v1.0
 - name: CONTEXT_DIR
