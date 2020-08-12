@@ -18,15 +18,6 @@ objects:
       targetPort: 8080
     selector:
       name: golang-demo  
-- kind: Route
-  apiVersion: v1
-  metadata:
-    name: golang-demo-route
-  spec:
-    host: "${APPLICATION_DOMAIN}"
-    to:
-      kind: Service
-      name: golang-demo-service
 - kind: ImageStream
   apiVersion: v1
   metadata:
@@ -73,8 +64,6 @@ parameters:
 - name: SOURCE_REPOSITORY_REF
   value: v1.0
 - name: CONTEXT_DIR
-- name: APPLICATION_DOMAIN
-  value: chat.leanhtuan.org
 - name: GITHUB_WEBHOOK_SECRET
   generate: expression
   from: "[a-zA-Z0-9]{40}"

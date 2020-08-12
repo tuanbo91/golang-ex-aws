@@ -1,0 +1,16 @@
+kind: DestinationRule
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: golang-demo-service
+  namespace: golang-demo
+  labels:
+    kiali_wizard: weighted_routing
+spec:
+  host: golang-demo-service.golang-demo.svc.cluster.local
+  subsets:
+    - labels:
+        version: '10'
+      name: '10'
+    - labels:
+        version: '11'
+      name: '11'

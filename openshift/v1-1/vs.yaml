@@ -1,0 +1,22 @@
+kind: VirtualService
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: golang-demo-service
+  namespace: golang-demo
+  labels:
+    kiali_wizard: weighted_routing
+spec:
+  hosts:
+    - chat.leanhtuan.org
+  gateways:
+    - golang-demo/golang-demo-service-gateway
+  http:
+    - route:
+        - destination:
+            host: golang-demo-service.golang-demo.svc.cluster.local
+            subset: '10'
+          weight: 50
+        - destination:
+            host: golang-demo-service.golang-demo.svc.cluster.local
+            subset: '11'
+          weight: 50
